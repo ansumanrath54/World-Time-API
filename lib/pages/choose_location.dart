@@ -19,6 +19,8 @@ class _LocationState extends State<Location> {
     WorldTime(location: 'New York', flag: 'usa.png', url: 'America/New_York'),
     WorldTime(location: 'Seoul', flag: 'south_korea.png', url: 'Asia/Seoul'),
     WorldTime(location: 'Jakarta', flag: 'indonesia.png', url: 'Asia/Jakarta'),
+    WorldTime(location: 'India', flag: 'india.png', url: 'Asia/Kolkata'),
+    WorldTime(location: 'Berlin', flag: 'germany.png', url: 'Europe/Berlin')
   ];
 
   void updateTime(index) async {
@@ -36,7 +38,7 @@ class _LocationState extends State<Location> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Choose a Location'),
+        title: const Text('Choose a Location'),
         centerTitle: true,
       ),
       body: ListView.builder(

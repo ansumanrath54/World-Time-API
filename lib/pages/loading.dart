@@ -22,9 +22,6 @@ class _LoadingState extends State<Loading> {
       'time': instance.time,
       'isDayTime': instance.isDayTime
     });
-    // setState(() {
-    //   time = instance.time;
-    // });
   }
 
   @override

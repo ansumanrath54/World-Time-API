@@ -17,12 +17,12 @@ class WorldTime {
       Response response = await get(Uri.parse("http://worldtimeapi.org/api/timezone/$url"));
       Map data = jsonDecode(response.body);
       String datetime = data['datetime'];
-      String offset = data['utc_offset'].substring(1,3);
+      String offsetHr = data['utc_offset'].substring(1,3);
+      String offsetMin = data['utc_offset'].substring(4,6);
       String sign = data['utc_offset'].substring(0,1);
-      print(sign);
       DateTime now = DateTime.parse(datetime);
-      now = sign.contains('+') ? now.add(Duration(hours: int.parse(offset)))
-          : now.subtract(Duration(hours: int.parse(offset)));
+      now = sign.contains('+') ? now.add(Duration(hours: int.parse(offsetHr), minutes: int.parse(offsetMin)))
+          : now.subtract(Duration(hours: int.parse(offsetHr), minutes: int.parse(offsetMin)));
       isDayTime = now.hour > 5 && now.hour < 17;
       time = DateFormat.jm().format(now);
     }
