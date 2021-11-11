@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
     String bgImage = data['isDayTime'] ? 'day.jpg' : 'night.jpg';
     Color bgColor = data['isDayTime'] ? Colors.blue : Colors.black38;
 
-    Future<void> updateTime(WorldTime worldTime) async {
+    Future<void> update(WorldTime worldTime) async {
 
       await worldTime.getTime();
 
@@ -51,19 +51,21 @@ class _HomePageState extends State<HomePage> {
             child:
             RefreshIndicator(
 
-              onRefresh: () { return updateTime(worldTime); },
+              onRefresh: () { return update(worldTime); },
               child: ListView(
                 children: [
                   FlatButton.icon(
                     onPressed: () async {
                       dynamic result = await Navigator.pushNamed(context, '/location');
+                      worldTime = WorldTime(location: result['location'], flag: result['flag'], url: result['url']);
+                      await worldTime.getTime();
+
                       setState(() {
-                        worldTime = result;
                         data = {
-                          'location': result['location'],
-                          'flag': result['flag'],
-                          'time': result['time'],
-                          'isDayTime': result['isDayTime']
+                          'location': worldTime.location,
+                          'flag': worldTime.flag,
+                          'time': worldTime.time,
+                          'isDayTime': worldTime.isDayTime
                         };
                       });
                     },

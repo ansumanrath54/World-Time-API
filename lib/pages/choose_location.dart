@@ -29,8 +29,7 @@ class _LocationState extends State<Location> {
     Navigator.pop(context, {
       'location': instance.location,
       'flag': instance.flag,
-      'time': instance.time,
-      'isDayTime': instance.isDayTime
+      'url': instance.url
     });
   }
 
